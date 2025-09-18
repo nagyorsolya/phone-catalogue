@@ -1,4 +1,7 @@
 import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
+
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { PhoneList } from "./components/PhoneList";
 import { PhoneDetail } from "./components/PhoneDetail";
@@ -7,7 +10,7 @@ function App() {
   return (
     <Router>
       <header>
-        <h1>Phone Catalogue</h1>
+        <h1 className="text-center mt-4">Phone Catalogue</h1>
       </header>
       <main>
         <Routes>
