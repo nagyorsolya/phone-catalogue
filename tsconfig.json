@@ -4,11 +4,15 @@
     "experimentalDecorators": true /* Enable experimental support for legacy experimental decorators. */,
     "emitDecoratorMetadata": true /* Emit design-type metadata for decorated declarations in source files. */,
     "module": "commonjs",
+    "outDir": "./backend/dist" /* Specify an output folder for all emitted files. */,
+    "rootDir": "./backend" /* Specify the root folder within your source files. */,
     "esModuleInterop": true /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables 'allowSyntheticDefaultImports' for type compatibility. */,
     "forceConsistentCasingInFileNames": true /* Ensure that casing is correct in imports. */,
     "strict": true,
     "noImplicitAny": true /* Enable error reporting for expressions and declarations with an implied 'any' type. */,
     "strictPropertyInitialization": false /* Check for class properties that are declared but not set in the constructor. */,
     "skipLibCheck": true
-  }
+  },
+  "include": ["backend/**/*"],
+  "exclude": ["backend/node_modules", "backend/dist"]
 }
