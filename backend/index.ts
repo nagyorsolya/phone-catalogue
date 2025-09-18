@@ -2,6 +2,8 @@ import cors from "cors";
 import dotenv from "dotenv";
 import express, { Express, Request, Response } from "express";
 import morgan from "morgan";
+import fs from "fs";
+import path from "path";
 
 dotenv.config();
 
@@ -30,7 +32,17 @@ app.use((req, res, next) => {
 
 // Routes
 app.get("/phones", async (req: Request, res: Response) => {
-  res.json({ message: "Phones endpoint working!" });
+  try {
+    const phonesData = fs.readFileSync(
+      path.join(__dirname, "static", "phones.json"),
+      "utf8"
+    );
+    const phones = JSON.parse(phonesData);
+    res.json(phones);
+  } catch (error) {
+    console.error("Error reading phones data:", error);
+    res.status(500).json({ error: "Failed to load phones data" });
+  }
 });
 
 app.listen(process.env.PORT || 3000, () => {
