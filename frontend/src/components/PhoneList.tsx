@@ -40,7 +40,11 @@ export const PhoneList = () => {
   }, []);
 
   if (loading) {
-    return <div>Loading phones...</div>;
+    return (
+      <div className="d-flex justify-content-center align-items-center position-fixed top-0 start-0 w-100 h-100">
+        <div className="spinner"></div>
+      </div>
+    );
   }
 
   if (error) {
@@ -48,11 +52,12 @@ export const PhoneList = () => {
   }
 
   return (
-    <div className="container mt-4">
+    <div className="container-fluid px-3 py-3" style={{ minHeight: "100vh" }}>
       <div
         id="phoneCarousel"
         className="carousel slide carousel-dark"
         data-bs-ride="carousel"
+        style={{ minHeight: "90vh" }}
       >
         <div className="carousel-indicators">
           {phones.map((_, index) => (
@@ -73,25 +78,34 @@ export const PhoneList = () => {
             <div
               key={phone.id}
               className={`carousel-item ${index === 0 ? "active" : ""}`}
+              style={{ minHeight: "90vh" }}
             >
-              <div className="row align-items-center">
-                <div className="col-md-6">
-                  <img
-                    src={`${process.env.REACT_APP_BACKEND_URL}/static/images/${phone.imageFileName}`}
-                    alt={phone.name}
-                    className="d-block w-100"
-                    style={{ maxHeight: "400px", objectFit: "contain" }}
-                  />
-                </div>
-                <div className="col-md-6">
-                  <div className="carousel-caption-custom text-dark">
-                    <h3>{phone.name}</h3>
-                    <p className="text-muted">{phone.manufacturer}</p>
-                    <h4 className="text-primary">${phone.price}</h4>
-                    <p className="w-75">{phone.description}</p>
-                    <Link to={`/phone/${phone.id}`} className="btn btn-primary">
-                      View Details
-                    </Link>
+              <div className="d-flex align-items-center h-100">
+                <div className="row align-items-center g-3 w-100">
+                  <div className="col-12 col-md-6 text-center">
+                    <img
+                      src={`${process.env.REACT_APP_BACKEND_URL}/static/images/${phone.imageFileName}`}
+                      alt={phone.name}
+                      className="d-block mx-auto"
+                      style={{
+                        maxHeight: "300px",
+                        maxWidth: "200px",
+                        objectFit: "contain",
+                      }}
+                    />
+                  </div>
+                  <div className="col-12 col-md-6">
+                    <div className="carousel-caption-custom text-dark text-center text-md-start p-3 pb-5">
+                      <h3 className="mb-2">{phone.name}</h3>
+                      <p className="text-muted mb-2">{phone.manufacturer}</p>
+                      <h4 className="text-primary mb-3">${phone.price}</h4>
+                      <Link
+                        to={`/phone/${phone.id}`}
+                        className="btn btn-primary mb-4"
+                      >
+                        View Details
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>
