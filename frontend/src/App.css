@@ -16,3 +16,49 @@
   border-right: 5px solid black;
   animation: spin 1s linear infinite;
 }
+
+/* Phone Detail Responsive Styles */
+.phone-detail-card {
+  max-width: 100%;
+  width: 100%;
+}
+
+.phone-detail-image {
+  width: 100%;
+  height: auto;
+  max-width: 400px;
+  object-fit: contain;
+}
+
+@media (max-width: 767.98px) {
+  .phone-detail-card {
+    margin: 1rem;
+    padding: 1rem;
+  }
+
+  .phone-detail-image {
+    margin-bottom: 1rem;
+    max-height: 400px;
+  }
+
+  .card-body {
+    padding-top: 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .phone-detail-card {
+    max-width: 1200px;
+  }
+
+  .phone-detail-image {
+    height: 600px;
+    width: 500px;
+    flex-shrink: 0;
+    margin-right: 2rem;
+  }
+
+  .card-body {
+    flex: 1;
+  }
+}
