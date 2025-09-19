@@ -75,7 +75,7 @@ const PhoneListComponent = ({
                   <div className="text-center">
                     <div className="mb-3">
                       <img
-                        src={`${process.env.REACT_APP_BACKEND_URL}/static/images/${phone.imageFileName}`}
+                        src={`/static/images/${phone.imageFileName}`}
                         alt={phone.name}
                         className="d-block mx-auto phone-list-image"
                       />
@@ -139,12 +139,12 @@ export const PhoneList = () => {
   const fetchPhones = useCallback(async (search?: string) => {
     setIsLoading(true);
     try {
-      const url = new URL(`${process.env.REACT_APP_BACKEND_URL}/phones`);
-      if (search) {
-        url.searchParams.append("search", search);
-      }
+      const baseUrl = `${process.env.REACT_APP_BACKEND_URL}/phones`;
+      const url = search
+        ? `${baseUrl}?search=${encodeURIComponent(search)}`
+        : baseUrl;
 
-      const response = await fetch(url.toString());
+      const response = await fetch(url);
       if (!response.ok) {
         throw new Error("Failed to fetch phones");
       }

@@ -37,7 +37,7 @@ const PhoneDetailComponent = ({ phone, error }: PhoneDetailProps) => {
       <div className="d-flex justify-content-center align-items-center">
         <div className="card phone-detail-card d-flex flex-column flex-md-row justify-content-center align-items-center mx-4">
           <img
-            src={`${process.env.REACT_APP_BACKEND_URL}/static/images/${phone.imageFileName}`}
+            src={`/static/images/${phone.imageFileName}`}
             alt={phone.name}
             className="phone-detail-image"
           />
