@@ -1,56 +1,14 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { withLoading } from "../hoc/Loading";
+import { Phone } from "../types";
 
-interface Phone {
-  id: number;
-  name: string;
-  manufacturer: string;
-  description: string;
-  color: string;
-  price: number;
-  imageFileName: string;
-  screen: string;
-  processor: string;
-  ram: number;
+interface PhoneListProps {
+  loading?: boolean;
+  phones: Phone[];
 }
-export const PhoneList = () => {
-  const [phones, setPhones] = useState<Phone[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const fetchPhones = async () => {
-      try {
-        const response = await fetch(
-          `${process.env.REACT_APP_BACKEND_URL}/phones`
-        );
-        if (!response.ok) {
-          throw new Error("Failed to fetch phones");
-        }
-        const phonesData = await response.json();
-        setPhones(phonesData);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : "An error occurred");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchPhones();
-  }, []);
-
-  if (loading) {
-    return (
-      <div className="d-flex justify-content-center align-items-center position-fixed top-0 start-0 w-100 h-100">
-        <div className="spinner"></div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
-
+const PhoneListComponent = ({ phones }: PhoneListProps) => {
   return (
     <div className="container-fluid px-3 py-3" style={{ minHeight: "100vh" }}>
       <div
@@ -139,4 +97,39 @@ export const PhoneList = () => {
       </div>
     </div>
   );
+};
+
+const EnhancedPhoneList = withLoading(PhoneListComponent);
+
+export const PhoneList = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [phones, setPhones] = useState<Phone[]>([]);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchPhones = async () => {
+      try {
+        const response = await fetch(
+          `${process.env.REACT_APP_BACKEND_URL}/phones`
+        );
+        if (!response.ok) {
+          throw new Error("Failed to fetch phones");
+        }
+        const phonesData = await response.json();
+        setPhones(phonesData);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "An error occurred");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchPhones();
+  }, []);
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+  return <EnhancedPhoneList loading={isLoading} phones={phones} />;
 };

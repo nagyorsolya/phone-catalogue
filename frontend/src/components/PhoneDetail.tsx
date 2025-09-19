@@ -1,57 +1,15 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
+import { withLoading } from "../hoc/Loading";
+import { Phone } from "../types";
 
-interface Phone {
-  id: number;
-  name: string;
-  manufacturer: string;
-  description: string;
-  color: string;
-  price: number;
-  imageFileName: string;
-  screen: string;
-  processor: string;
-  ram: number;
+interface PhoneDetailProps {
+  loading?: boolean;
+  phone: Phone | null;
+  error: string | null;
 }
 
-export const PhoneDetail = () => {
-  const { id } = useParams<{ id: string }>();
-  const [phone, setPhone] = useState<Phone | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchPhone = async () => {
-      try {
-        const response = await fetch(
-          `${process.env.REACT_APP_BACKEND_URL}/phones/${id}`
-        );
-        if (!response.ok) {
-          throw new Error("Phone not found");
-        }
-        const phoneData = await response.json();
-        setPhone(phoneData);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : "An error occurred");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    if (id) {
-      fetchPhone();
-    }
-  }, [id]);
-
-  // TODO create a HOC for loading
-  if (loading) {
-    return (
-      <div className="d-flex justify-content-center align-items-center position-fixed top-0 start-0 w-100 h-100">
-        <div className="spinner"></div>
-      </div>
-    );
-  }
-
+const PhoneDetailComponent = ({ phone, error }: PhoneDetailProps) => {
   if (error) {
     return (
       <div className="error">
@@ -122,5 +80,41 @@ export const PhoneDetail = () => {
         ← Back to Phone List
       </Link>
     </>
+  );
+};
+
+const EnhancedPhoneDetail = withLoading(PhoneDetailComponent);
+
+export const PhoneDetail = () => {
+  const { id } = useParams<{ id: string }>();
+  const [phone, setPhone] = useState<Phone | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchPhone = async () => {
+      try {
+        const response = await fetch(
+          `${process.env.REACT_APP_BACKEND_URL}/phones/${id}`
+        );
+        if (!response.ok) {
+          throw new Error("Phone not found");
+        }
+        const phoneData = await response.json();
+        setPhone(phoneData);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "An error occurred");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    if (id) {
+      fetchPhone();
+    }
+  }, [id]);
+
+  return (
+    <EnhancedPhoneDetail loading={isLoading} phone={phone} error={error} />
   );
 };
