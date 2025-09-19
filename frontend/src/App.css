@@ -62,11 +62,22 @@
     margin-top: auto;
     align-self: center;
   }
+
+  .carousel-indicators {
+    bottom: -5rem !important;
+  }
 }
 
 @media (min-width: 768px) {
   .phone-detail-card {
     max-width: 1200px;
+  }
+
+  .container-fluid {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
   }
 
   .phone-detail-image {
@@ -81,15 +92,32 @@
   }
 
   .phone-list-image {
-    height: 300px;
-    width: 200px;
+    height: 250px;
+    width: 180px;
     object-fit: contain;
+    max-height: 40vh;
   }
 
   .carousel.slide {
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  .carousel-inner {
+    height: 100%;
+  }
+
+  .carousel-item {
+    height: 100%;
+  }
+
+  .phone-info {
+    max-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 
   .carousel-caption-custom {
@@ -102,5 +130,9 @@
   .carousel-caption-custom .btn {
     margin-top: auto;
     align-self: center;
+  }
+
+  .carousel-indicators {
+    bottom: -10rem !important;
   }
 }

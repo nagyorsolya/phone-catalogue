@@ -34,9 +34,15 @@ app.use((req, res, next) => {
 
 // Routes
 app.get("/phones", async (req: Request, res: Response) => {
+  const search = req.query.search as string;
   try {
     const phones = loadPhonesData();
-    res.json(phones);
+    const filteredPhones = search
+      ? phones.filter((p) =>
+          p.name.toLowerCase().includes(search.toLowerCase())
+        )
+      : phones;
+    res.json(filteredPhones);
   } catch (error) {
     res.status(500).json({ error: "Failed to load phones data" });
   }
