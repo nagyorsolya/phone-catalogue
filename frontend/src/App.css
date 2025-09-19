@@ -44,6 +44,24 @@
   .card-body {
     padding-top: 0;
   }
+
+  .phone-list-image {
+    height: 250px;
+    width: 200px;
+    object-fit: contain;
+  }
+
+  .carousel-caption-custom {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 200px;
+  }
+
+  .carousel-caption-custom .btn {
+    margin-top: auto;
+    align-self: center;
+  }
 }
 
 @media (min-width: 768px) {
@@ -60,5 +78,11 @@
 
   .card-body {
     flex: 1;
+  }
+
+  .phone-list-image {
+    max-height: 300px;
+    max-width: 200px;
+    object-fit: contain;
   }
 }

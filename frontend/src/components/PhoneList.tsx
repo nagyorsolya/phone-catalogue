@@ -44,12 +44,7 @@ const PhoneListComponent = ({ phones }: PhoneListProps) => {
                     <img
                       src={`${process.env.REACT_APP_BACKEND_URL}/static/images/${phone.imageFileName}`}
                       alt={phone.name}
-                      className="d-block mx-auto"
-                      style={{
-                        maxHeight: "300px",
-                        maxWidth: "200px",
-                        objectFit: "contain",
-                      }}
+                      className="d-block mx-auto phone-list-image"
                     />
                   </div>
                   <div className="col-12 col-md-6">
