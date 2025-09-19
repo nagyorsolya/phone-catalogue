@@ -81,8 +81,26 @@
   }
 
   .phone-list-image {
-    max-height: 300px;
-    max-width: 200px;
+    height: 300px;
+    width: 200px;
     object-fit: contain;
+  }
+
+  .carousel.slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .carousel-caption-custom {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 150px;
+  }
+
+  .carousel-caption-custom .btn {
+    margin-top: auto;
+    align-self: center;
   }
 }

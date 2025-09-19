@@ -36,19 +36,18 @@ const PhoneListComponent = ({ phones }: PhoneListProps) => {
             <div
               key={phone.id}
               className={`carousel-item ${index === 0 ? "active" : ""}`}
-              style={{ minHeight: "90vh" }}
             >
-              <div className="d-flex align-items-center h-100">
-                <div className="row align-items-center g-3 w-100">
-                  <div className="col-12 col-md-6 text-center">
+              <div className="d-flex h-100">
+                <div className="column g-3 w-100">
+                  <div className="col-12 text-center">
                     <img
                       src={`${process.env.REACT_APP_BACKEND_URL}/static/images/${phone.imageFileName}`}
                       alt={phone.name}
                       className="d-block mx-auto phone-list-image"
                     />
                   </div>
-                  <div className="col-12 col-md-6">
-                    <div className="carousel-caption-custom text-dark text-center text-md-start p-3 pb-5">
+                  <div className="col-12 ">
+                    <div className="carousel-caption-custom text-dark text-center p-3 pb-5">
                       <h3 className="mb-2">{phone.name}</h3>
                       <p className="text-muted mb-2">{phone.manufacturer}</p>
                       <h4 className="text-primary mb-3">${phone.price}</h4>
