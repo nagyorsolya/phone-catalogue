@@ -20,9 +20,9 @@ const PhoneListComponent = ({
     <div className="container-fluid">
       <div className="row mb-4">
         <div className="col-12 col-md-6 mx-auto">
-          <div className="input-group">
-            <span className="input-group-text bg-primary text-white">
-              <i className="fas fa-search"></i>
+          <div className="input-group search-input-group">
+            <span className="input-group-text">
+              <i className="bi bi-search"></i>
             </span>
             <input
               type="text"
@@ -38,7 +38,7 @@ const PhoneListComponent = ({
       {phones.length === 0 && searchQuery && (
         <div className="text-center py-5">
           <div className="text-muted">
-            <i className="fas fa-search fa-3x mb-3"></i>
+            <i className="bi bi-search"></i>
             <p>No phones match your search for "{searchQuery}"</p>
             <p className="small">Try searching with different keywords</p>
           </div>
