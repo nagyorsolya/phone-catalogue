@@ -47,7 +47,7 @@ app.get("/phones", async (req: Request, res: Response) => {
     res.status(500).json({ error: "Failed to load phones data" });
   }
 });
-
+// halllllllo
 app.get("/phones/:id", async (req: Request, res: Response) => {
   try {
     const phoneId = parseInt(req.params.id);
